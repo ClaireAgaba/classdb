@@ -45,6 +45,7 @@ class Video(models.Model):
     category = models.CharField(max_length=50)
     daily_rental = models.DecimalField(max_digits=10, decimal_places=2)
     cost = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
     status = models.CharField(max_length=50)
     actors = models.TextField()
     director = models.CharField(max_length=100)
@@ -53,12 +54,14 @@ class Video(models.Model):
 
     def __str__(self) :
         return self.title + " " + self.catalog_number
+    
 
 class Rental(models.Model):
     rental_number = models.CharField(max_length=5, primary_key=True)
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    video_number = models.ForeignKey(Video, on_delete=models.CASCADE)
-    branch_number = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
     rental_date = models.DateField()
     return_date = models.DateField()
     due_date = models.DateField()
