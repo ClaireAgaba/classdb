@@ -9,3 +9,11 @@ def home(request):
 
 def detail(request):
     return render (request, 'detail.html', {})
+
+
+def add_video(request):
+    return render (request, 'addvid.html', {})
+
+
+def issue_video(request):
+    return render (request, 'issue.html', {})
